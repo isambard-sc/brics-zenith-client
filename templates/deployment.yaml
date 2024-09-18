@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zenith-client
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: zenith-client
+  template:
+    metadata:
+      labels:
+        app: zenith-client
+    spec:
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      hostNetwork: false
+      containers:
+        - name: zenith-client
+          image: {{ .Values.zenithClient.image.repository }}:{{ .Values.zenithClient.image.tag }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ZENITH_CLIENT__SSH_IDENTITY_PATH
+              value: /etc/zenith/ssh_key
+          securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
+          resources: {{ toYaml .Values.zenithClient.resources | nindent 12 }} 
+          volumeMounts:
+            - name: etc-zenith
+              mountPath: /etc/zenith
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: etc-zenith
+          secret:
+            secretName: zenith-client
+        - name: tmp
+          emptyDir: {}

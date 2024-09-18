@@ -1,0 +1,41 @@
+secretName: "my-ssh-key-secret"
+appName: "zenith-client"
+environment: "development"
+
+zenithClient:
+  sshKey:
+    private: |-
+      -----BEGIN OPENSSH PRIVATE KEY-----
+      ...
+      -----END OPENSSH PRIVATE KEY-----
+    public: ssh-rsa AAAAB3...
+  config:
+    debug: true
+    registrarUrl: '{{ fail "registrar URL is required" }}'
+    token: '{{ fail "token is required" }}'
+    serverAddress: '{{ fail "server address is required" }}'
+    # authOidcIssuer: ""
+    # authOidcClientId: ""
+    # authOidcClientSecret: ""
+  image:
+    repository: ghcr.io/stackhpc/zenith-client
+    tag: 0.10.1
+  resources: {}
+
+replicaCount: 2
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ALL]
+  readOnlyRootFilesystem: true
+
+resources: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
