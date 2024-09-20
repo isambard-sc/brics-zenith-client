@@ -12,7 +12,7 @@ source "$1"
 # Run the helm upgrade command
 helm upgrade zenith-client . \
   --install \
-  --namespace zc-jhub-dev \
+  --namespace $NAMESPACE \
   --values values.yaml \
   --set zenithClient.config.registrarUrl="https://$ZENITH_REGISTRAR_HOST/registrar" \
   --set zenithClient.config.serverAddress="$ZENITH_SSHD_IP" \
