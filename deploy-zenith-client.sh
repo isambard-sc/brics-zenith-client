@@ -22,6 +22,6 @@ helm upgrade zenith-client . \
   --set zenithClient.config.authOidcIssuer="$OIDC_ISSUER" \
   --set zenithClient.config.authOidcClientId="$OIDC_CLIENTID" \
   --set zenithClient.config.authOidcClientSecret="$OIDC_SECRET" \
-  --set zenithClient.config.forwardToHost="$JUPYTER_HOST" \
-  --set zenithClient.config.forwardToPort="$JUPYTER_PORT" \
+  --set zenithClient.config.forwardToHost="$WEB_APP_IP" \
+  --set zenithClient.config.forwardToPort="$WEB_APP_PORT" \
   --wait
