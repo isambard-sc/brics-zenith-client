@@ -28,4 +28,6 @@ helm upgrade zenith-client . "$@" \
   --set zenithClient.config.authOidcClientSecret="$OIDC_SECRET" \
   --set zenithClient.config.forwardToHost="$WEB_APP_IP" \
   --set zenithClient.config.forwardToPort="$WEB_APP_PORT" \
+  --set environment="${ENVIRONMENT}" \
+  --set replicaCount="${REPLICA_COUNT}" \
   --wait

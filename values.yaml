@@ -1,14 +1,11 @@
 secretName: "zenith-ssh-key-secret"
 appName: "zenith-client"
-environment: "{{ .Values.environment | default (env "ENVIRONMENT") | default "development" }}"
 
 zenithClient:
   image:
     repository: ghcr.io/stackhpc/zenith-client
     tag: 0.10.1
   resources: {}
-
-replicaCount:  {{ .Values.replicaCount | default ( env "REPLICA_COUNT" | default 2 ) }}
 
 podSecurityContext:
   runAsNonRoot: true
