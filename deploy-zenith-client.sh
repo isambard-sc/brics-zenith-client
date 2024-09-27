@@ -2,15 +2,18 @@
 
 # Check if the source file is provided as a parameter
 if [ -z "$1" ]; then
-  echo "Usage: $0 <source-file>"
+  echo "Usage: $0 <source-file> [additional Helm arguments...]"
   exit 1
 fi
 
 # Source the provided file
 source "$1"
 
-# Run the helm upgrade command
-helm upgrade zenith-client . \
+# Drop positional parameter $1, so $@ contains only second argument and above
+shift 1
+
+# Run the helm upgrade command with optional additional Helm arguments
+helm upgrade zenith-client . "$@" \
   --install \
   --namespace $NAMESPACE \
   --values values.yaml \
