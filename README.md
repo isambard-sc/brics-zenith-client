@@ -11,6 +11,8 @@ For zenith client, please read [Zenith Client Documentation](https://github.com/
 
 - kubectl: Required to interact with the K3s cluster.
 
+- helm: Required to deploy the Helm chart to the K3s cluster.
+
 - jq: Required for parsing JSON files within the scripts.
 
 ## Prepare Configuration 
