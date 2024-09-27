@@ -32,6 +32,6 @@ spec:
       volumes:
         - name: etc-zenith
           secret:
-            secretName: zenith-client
+            secretName: {{ .Values.secretName }}
         - name: tmp
           emptyDir: {}
