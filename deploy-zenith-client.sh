@@ -15,6 +15,7 @@ shift 1
 # Run the helm upgrade command with optional additional Helm arguments
 helm upgrade zenith-client . "$@" \
   --install \
+  --create-namespace \
   --namespace $NAMESPACE \
   --values values.yaml \
   --set zenithClient.config.registrarUrl="https://$ZENITH_REGISTRAR_HOST/registrar" \

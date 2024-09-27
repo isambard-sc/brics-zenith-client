@@ -55,20 +55,14 @@ kubectl config use-context <your-cluster>
 kubectl config current-context
 ```
 
-1. Create a namespace, which matches your variable set in the file
+1. Make sure all variables are set in your enviornment file (development.env)
 
-```
-kubectl create namespace <your-zenith-workspace>
-kubectl get namespaces
-```
-2. Make sure all variables are set in your enviornment file (development.env)
-
-3. Set Default Namespace in your current context(Optional)
+2. Set Default Namespace in your current context(Optional)
 ```
 kubectl config set-context --current --namespace=<your-name-space>
 ```
 
-4. Deploy zenith client to a k3s or k8s cluster
+3. Deploy zenith client to a k3s or k8s cluster
 ```
 chmod +x deploy-zenith.sh
 ./deploy-zenith.sh development
