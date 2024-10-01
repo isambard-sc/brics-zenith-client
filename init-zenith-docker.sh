@@ -19,9 +19,10 @@ fi
 # Run the zenith-client init command using Docker
 docker run --rm \
   -v "$SSH_PRIKEY_FILE:/ssh_key:ro" \
+  -v "$SSH_PUBKEY_FILE:/ssh_key.pub:ro" \
   -v "$SUBDOMAIN_FILE:/subdomain.json:ro" \
   ghcr.io/stackhpc/zenith-client:0.10.1 \
   zenith-client init \
   --registrar-url "https://$ZENITH_REGISTRAR_HOST/registrar/" \
-  --token "$(jq -r '.token' /subdomain.json)" \
+  --token "$(jq -r '.token' $SUBDOMAIN_FILE)" \
   --ssh-identity-path /ssh_key
