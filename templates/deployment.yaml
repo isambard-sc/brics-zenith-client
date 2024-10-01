@@ -13,8 +13,10 @@ spec:
         app: zenith-client
     spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: {{ .Values.podHostNetwork }}
+      {{- if eq .Values.podHostNetwork true }}
+      dnsPolicy: {{ .Values.poddnsPolicy }} ClusterFirstWithHostNet
+      {{- end }}
       containers:
         - name: zenith-client
           image: {{ .Values.zenithClient.image.repository }}:{{ .Values.zenithClient.image.tag }}
