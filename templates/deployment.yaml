@@ -13,7 +13,10 @@ spec:
         app: zenith-client
     spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
-      hostNetwork: false
+      hostNetwork: {{ .Values.podHostNetwork }}
+      {{- if eq .Values.podHostNetwork true }}
+      dnsPolicy: {{ .Values.poddnsPolicy }} ClusterFirstWithHostNet
+      {{- end }}
       containers:
         - name: zenith-client
           image: {{ .Values.zenithClient.image.repository }}:{{ .Values.zenithClient.image.tag }}
@@ -32,6 +35,6 @@ spec:
       volumes:
         - name: etc-zenith
           secret:
-            secretName: zenith-client
+            secretName: {{ .Values.secretName }}
         - name: tmp
           emptyDir: {}

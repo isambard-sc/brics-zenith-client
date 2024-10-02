@@ -16,8 +16,12 @@ if [ -z "$ZENITH_REGISTRAR_HOST" ] || [ -z "$SUBDOMAIN_FILE" ] || [ -z "$SSH_PRI
   exit 1
 fi
 
-# Run the zenith-client init command using Docker
-docker run --rm \
+# Run the zenith-client init command using podman
+# NOTE: `--security-opt label=disable` disables SELinux label separation to
+#   allow bind mounting of host files without changing SELinux labels in the
+#   host filesystem
+podman run --rm \
+  --security-opt label=disable \
   -v "$SSH_PRIKEY_FILE:/ssh_key:ro" \
   -v "$SSH_PUBKEY_FILE:/ssh_key.pub:ro" \
   -v "$SUBDOMAIN_FILE:/subdomain.json:ro" \
