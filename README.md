@@ -77,12 +77,12 @@ chmod +x init-zenith-docker.sh
    ./deploy-zenith-client.sh development.env
    ```
 
-   > [!TIP]
-   > Additional command line arguments after the environment file will be passed to `helm upgrade`. This is useful to add options for debugging the chart, e.g. for a dry-run with debug output
-   >
-   > ```shell
-   > ./deploy-zenith-client.sh development.env --debug --dry-run
-   > ```
+> [!TIP]
+> Additional command line arguments after the environment file will be passed to `helm upgrade`. This is useful to add options for debugging the chart, e.g. for a dry-run with debug output
+>
+> ```shell
+> ./deploy-zenith-client.sh development.env --debug --dry-run
+> ```
 
 > [!NOTE]
 > If the service to be proxied is listening on the host where Zenith client is running and outside of the Kubernetes cluster (e.g. listening on a host loopback address, `127.0.0.1` or `::1`), then the chart will need to have Zenith client pod's `hostNetwork` setting set to `true`. This can be done by passing an extra argument to set the `podHostNetwork` chart value to `./deploy-zenith-client.sh`:
